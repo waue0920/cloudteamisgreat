@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+src/cloudteamisgreat/__init__.py
+src/cloudteamisgreat/main.py
+src/cloudteamisgreat/setup.py
+src/cloudteamisgreat/util.py
+src/cloudteamisgreat/version.py
+src/cloudteamisgreat.egg-info/PKG-INFO
+src/cloudteamisgreat.egg-info/SOURCES.txt
+src/cloudteamisgreat.egg-info/dependency_links.txt
+src/cloudteamisgreat.egg-info/entry_points.txt
+src/cloudteamisgreat.egg-info/requires.txt
+src/cloudteamisgreat.egg-info/top_level.txt
+src/cloudteamisgreat/cli/config.py
+src/cloudteamisgreat/cli/user.py
+src/cloudteamisgreat/yaml/logging.yaml
