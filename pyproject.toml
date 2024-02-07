@@ -7,7 +7,7 @@ name = "cloudteamisgreat"
 authors = [
     {name = "WeiYu", email = "wychen@narlabs.org.tw"},
 ]
-version = "0.0.1"
+version = "0.0.2"
 description = "cloudteamisgreat"
 readme = "README.md"
 requires-python = ">=3.6"

@@ -1,0 +1,26 @@
+# 2_ build dist/*
+
+git pull 
+python -m build
+ls dist/
+
+# 3_ Test 
+
+## 3.1 local
+conda activate pypi-local
+
+pip install -e .
+
+## 3.2 test pypi
+conda activate pypi-test
+
+twine upload --repository testpypi dist/*
+
+pip install --index-url https://test.pypi.org/simple/ --no-deps xxxxxx
+
+## 3.3 main pypi
+conda activate pypi
+
+twine upload dist/*
+
+pip install xxxxxx
