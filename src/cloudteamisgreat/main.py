@@ -1,63 +1,47 @@
 import os
-import click
+
 from cloudteamisgreat.version import __version__ 
 from cloudteamisgreat import logger
-
+import cloudteamisgreat
+import time
+import os
 
 # Folder containing command modules 
-plugin_folder = os.path.join(os.path.dirname(__file__), 'cli')
+prompt = [
+    "帥氣無法擋。",
+    "魅力沒話說。",
+    "老鼠愛大米，大家愛吉米。",
+    "我只是講話比較浮誇。"
+]
+
+def parse(string):
+    name = string.split(" ")
+    return name[0]
 
 
-class cloudteamisgreat(click.MultiCommand):
+def thinking():
+    print("thinking", end="")
+    for i in range(5):
+        time.sleep(1) 
+        print(".", end="") # 輸出一個點，不換行
+        print("\r" + " " * (9 + i), end="\r") # 回到行首，用空白字元覆蓋原來的字串
+        print("thinking" + "." * (i + 1), end="\r") # 回到行首，輸出新的字串
+    print() 
+        
 
-    # List available commands
-    def list_commands(self, ctx):
-        rv = []
-        for filename in os.listdir(plugin_folder):
-            if filename.endswith('.py') and filename != '__init__.py':
-                rv.append(filename[:-3])
-        rv.sort()
-        return rv
+def start():
+    print('你好，我是 你是在哈囉嗎 語言模型')
+    for i in range(4):
+        
+        print('===============================')
+        query = input("你想問我什麼呢？")
+        name = parse(query)
+        thinking()
+        if i < 2:
+            print(f"{name} {prompt[i]}")
+        else:
+            print(f"{prompt[i]}")
+        
 
-    # Import and return command module
-    def get_command(self, ctx, name):
-        ns = {}
-        fn = os.path.join(plugin_folder, name + '.py')
-        try:
-            with open(fn) as f:
-                code = compile(f.read(), fn, 'exec')
-                eval(code, ns, ns)
-
-            return ns['cli']
-        except FileNotFoundError as e:
-            logger.exception(e)
-    
-    # Invoke command and handle exceptions
-    def invoke(self, ctx):
-        try:
-            return super(cloudteamisgreat, self).invoke(ctx)
-        except click.exceptions.Exit:
-            pass
-        except click.exceptions.MissingParameter as e:
-            click.echo(e.show()) 
-        except Exception as e:
-            click.echo(f'{type(e).__name__}: {e}')
-            logger.exception(e)
-
-
-# Print version number callback
-def print_version(ctx, param, value):
-    if not value or ctx.resilient_parsing:
-        return
-    click.echo(f'This version is {__version__}')
-    ctx.exit()
-    
-# Create command context
-CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help']) 
-
-# Main CLI entrypoint
-@click.command(context_settings=CONTEXT_SETTINGS, cls=cloudteamisgreat)
-@click.option('-v', '--version', is_flag=True, callback=print_version,
-              expose_value=False, is_eager=True, help='Show version')
-def cli():
-    pass
+if __name__ == "__main__":
+    start()
